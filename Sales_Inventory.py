@@ -1,51 +1,40 @@
-n = 0
-main_list = []
-total_amount = []
-print ("       *** OLA VENTURES *** ")
-print(">>>All prices are in naira (NGN)<<<\n")
+KEY = True
+MAIN_LIST = []
+TOTAL_AMOUNT = []
+MINI_SEPARATION = "*" * 24
+SEPARATION = MINI_SEPARATION * 3
+CONFIRMATION = "\n    Do you want to add more items: "
 
+def Style(n):
+    print(SEPARATION )
+    print( f"●●● {n} ●●●".center(63, " "))
+    print(SEPARATION )    
+Style("OLA VENTURES")
 
-def store_value():
-
-    global n
-    n += 1
-    print("******************\n")
+i = 0
+items_prices = {}
+while KEY:
+   
+    i += 1
+    item = input(f"Enter item #{i} name: ").capitalize()
+    price = input(f"Enter item #{i} price: ")
+    price = float(price.replace(" ",""))
     
-    item = input('Enter item #' + str(n) + ' name: ')
-    check1_price= input('Enter item #' + str(n) +  ' price:')
-    price = float(check1_price.replace(" ",""))
-    
-    
-    items_prices = {}
     items_prices[item] = price
-    main_list.append(items_prices)
-    total_amount.append(price)
+    MAIN_LIST.append(items_prices)
+    TOTAL_AMOUNT.append(price)
     
-    print("\n    Do you want to add more items: ")
+    print(CONFIRMATION)
     
-    option = ""
-
-    while (option != 'Yes' or option != 'yes') or (option != 'No' or option != 'no'):
-        print("     Input either Yes or No: ")
-        check1_option = input( )
-        option = check1_option.replace(" ","")
-        if (option == 'Yes' or option == 'yes'):
-            return store_value()
-        elif (option == 'No' or option == 'no'):
+    option = " "
+    while len(option) != 0:
+        option = input("(yes/no): ").lower()
+        if (option.startswith('y')):
             print("\n")
             break
-       
-    for i in range(1):
-        for j in range(5):
-            j += 1
-            print("*"*j)
-            if j == 5:
-                for x in range(4,0,-1):
-                    print("*"*x)
-                
-            
-    print("\ntotal_cart = ",main_list)
-    print("\ntotal_amount_to_pay = ",sum(total_amount))
-   
-
-store_value()
+        elif (option.startswith('n')):
+            print("\nTotal Cart = ",MAIN_LIST)
+            print("\nTotal_Amount = ", sum(TOTAL_AMOUNT))
+            Style("THANKS FOR COMING")
+            KEY = False
+            break
